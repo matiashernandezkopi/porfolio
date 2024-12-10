@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 
 // Funciones auxiliares
 const generateRandomColumn = () => Math.floor(Math.random() * 9); // Ahora la columna puede ser de 0 a 8
-const isAdjacent = (pos1: { row: number; col: number }, pos2: { row: number; col: number }) =>
-  Math.abs(pos1.row - pos2.row) <= 1 && Math.abs(pos1.col - pos2.col) <= 1;
+const isAdjacent = (pos1: { row: number; col: number }, pos2: { row: number; col: number }) => {
+  const rowDiff = Math.abs(pos1.row - pos2.row);
+  const colDiff = Math.abs(pos1.col - pos2.col);
+  return rowDiff <= 1 && colDiff <= 1;
+};
 
 export default function BlueVsRed() {
   const [circle1, setCircle1] = useState<{ row: number; col: number } | null>(null); // Rojo
@@ -30,39 +33,35 @@ export default function BlueVsRed() {
 
   const handleRedMove = () => {
     if (!circle1 || !circle2 || winner) return;
-  
+
     const getCloserMove = () => {
       const rowStep = Math.sign(circle2.row - circle1.row);
       const colStep = Math.sign(circle2.col - circle1.col);
-  
+
       // Hacer que rojo tenga 10% más de posibilidades de moverse lejos de azul
       const randomFactor = Math.random();
       if (randomFactor < 0.1) {
         // Movimiento más alejado en alguna dirección
         return { row: circle1.row - rowStep, col: circle1.col - colStep };
       }
-  
+
       return { row: circle1.row + rowStep, col: circle1.col + colStep };
     };
-  
+
     const newPos = getCloserMove();
-  
-    // Verificar si rojo está en la diagonal o en los costados de azul antes de cambiar el turno
+
+    // Verificar si rojo está adyacente a azul antes de cambiar el turno
     if (isAdjacent(newPos, circle2)) {
       setWinner("Rojo");
+      return;
     } else {
       setCircle1(newPos);
-      // Verificar si el nuevo movimiento pone al círculo rojo en los costados o diagonales de azul
-      if (isAdjacent(newPos, circle2)) {
-        setWinner("Rojo");
-      } else {
-        setTurn(2); // Cambiar turno a azul
-      }
     }
-  
+
+    // Cambiar turno a azul
+    setTurn(2);
     setMoves((prev) => prev + 1);
   };
-  
 
   const handleCellClick = (row: number, col: number) => {
     if (!circle2 || turn !== 2 || winner) return;
@@ -71,7 +70,8 @@ export default function BlueVsRed() {
     if (isAdjacent(circle2, newPos) && !(newPos.row === circle1?.row && newPos.col === circle1?.col)) {
       setCircle2(newPos);
 
-      if (newPos.row === 8) { // Cambiado para la nueva fila
+      // Verificar si el círculo azul ha llegado al final
+      if (newPos.row === 8) {
         setWinner("Azul");
       } else if (circle1 && isAdjacent(newPos, circle1)) {
         setWinner("Rojo");
