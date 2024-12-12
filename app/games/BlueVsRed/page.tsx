@@ -108,6 +108,12 @@ export default function BlueVsRed() {
         </div>
       </Link>
       {/* Cuadrícula */}
+      <button
+              onClick={resetGame}
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
+            >
+              Reiniciar
+            </button>
       <div className="grid grid-cols-9 gap-1 mt-12">
         {Array.from({ length: 9 }).map((_, row) =>
           Array.from({ length: 9 }).map((_, col) => (
@@ -124,7 +130,7 @@ export default function BlueVsRed() {
       </div>
 
       {/* Indicador de turno */}
-      <div className="mt-6 text-lg font-bold">
+      <div className="mt-6 text-lg font-bold text-black">
         Turno de:{" "}
         <span className={turn === 1 ? "text-red-500" : "text-blue-500"}>
           {turn === 1 ? "Círculo Rojo" : "Círculo Azul"}
