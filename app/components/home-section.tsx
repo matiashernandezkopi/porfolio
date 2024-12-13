@@ -9,16 +9,17 @@ interface Project {
 }
 
 interface SectionProps {
+  title: string;
   proyects: Project[];
 }
 
-const Section: React.FC<SectionProps> = ({ proyects }) => {
+const Section: React.FC<SectionProps> = ({ title,proyects }) => {
     const { theme } = useTheme();
 
   return (
     <section className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-gray-200 mb-8 text-left bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-800 w-fit rounded-md p-2">
-        Explora nuestros Juegos
+        Explora nuestros {title}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {proyects.map((project, index) => (
@@ -43,7 +44,7 @@ const Section: React.FC<SectionProps> = ({ proyects }) => {
                         : "bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-800"
                     }`}
                 >
-                  Jugar Ahora
+                  Ir Ahora
                 </div>
               </Link>
             </div>

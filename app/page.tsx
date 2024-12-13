@@ -4,12 +4,18 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Section from "./components/home-section";
 
-const proyects = [
+const games = [
   {
     title: "Azul vs Rojo",
     description:
       "¡Un emocionante juego de estrategia donde Azul debe llegar abajo y Rojo debe capturar!",
     link: "/games/BlueVsRed",
+  },
+  {
+    title: "Higer Or Lower",
+    description:
+      "¡Un emocionante juego de estrategia donde Azul debe llegar abajo y Rojo debe capturar!",
+    link: "/games/HigerOrLower",
   },
 ];
 
@@ -47,7 +53,8 @@ export default function Home() {
 
       {/* Main */}
       <main className="flex-1 py-10 px-6">
-        <Section proyects={proyects} />
+
+        <Section title={"Juegos"} proyects={games} />
       </main>
 
       {/* Footer */}
