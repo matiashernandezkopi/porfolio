@@ -23,6 +23,14 @@ export default function BlueVsRed() {
     resetGame();
   }, []);
 
+  //Comprueba cada turno si rojo gano (si esta a una casilla de azul)
+  useEffect(()=>{
+    if (circle1 && circle2 && isAdjacent(circle1, circle2)) {
+      setWinner("Rojo");
+      return;
+    }
+  },[turn,circle1,circle2])
+
   const resetGame = () => {
     setCircle1({ row: 8, col: generateRandomColumn() }); // Círculo rojo en la fila 8
     setCircle2({ row: 0, col: generateRandomColumn() }); // Círculo azul en la fila 0
@@ -40,7 +48,7 @@ export default function BlueVsRed() {
 
       // Hacer que rojo tenga 10% más de posibilidades de moverse lejos de azul
       const randomFactor = Math.random();
-      if (randomFactor < 0.1) {
+      if (randomFactor < 0.1 && circle1.row!==8) {
         // Movimiento más alejado en alguna dirección
         return { row: circle1.row - rowStep, col: circle1.col - colStep };
       }
@@ -50,13 +58,9 @@ export default function BlueVsRed() {
 
     const newPos = getCloserMove();
 
-    // Verificar si rojo está adyacente a azul antes de cambiar el turno
-    if (isAdjacent(newPos, circle2)) {
-      setWinner("Rojo");
-      return;
-    } else {
-      setCircle1(newPos);
-    }
+   
+    setCircle1(newPos);
+    
 
     // Cambiar turno a azul
     setTurn(2);
@@ -73,8 +77,6 @@ export default function BlueVsRed() {
       // Verificar si el círculo azul ha llegado al final
       if (newPos.row === 8) {
         setWinner("Azul");
-      } else if (circle1 && isAdjacent(newPos, circle1)) {
-        setWinner("Rojo");
       } else {
         setTurn(1);
         setTimeout(handleRedMove, 500);
@@ -94,14 +96,14 @@ export default function BlueVsRed() {
       isAdjacent(circle2, { row, col }) &&
       !(row === circle1.row && col === circle1.col);
 
-    if (isCircle1) return "bg-red-500";
-    if (isCircle2) return "bg-blue-500";
+    if (isCircle1) return "bg-red-500 border-4 border-black";
+    if (isCircle2) return "bg-blue-500 border-4 border-black";
     if (isMovable) return "bg-green-300";
     return "bg-gray-200";
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-100 p-6">
+    <div className="flex flex-col items-center justify-center h-screen w-screen p-6 bg-gradient-to-tl from-blue-800 to-red-800">
       <Link href="../../">
         <div className="absolute top-6 left-6 text-white bg-blue-500 px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 transform hover:scale-105">
           Volver
@@ -140,12 +142,12 @@ export default function BlueVsRed() {
       {/* Modal de ganador */}
       {winner && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg text-center shadow-lg max-w-sm w-full">
+          <div className="bg-white p-8 rounded-lg text-center shadow-lg max-w-sm w-full text-black">
             <h2 className="text-3xl font-bold mb-4">¡{winner} gana!</h2>
             <p className="mb-4 text-lg">Movimientos totales: {moves}</p>
             <button
               onClick={resetGame}
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
+              className="bg-blue-500 px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
             >
               Reiniciar
             </button>
