@@ -24,11 +24,7 @@ export default function Home() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  const { t, language, setLanguage } = useLanguage();
-
-  const toggleLanguage = () => setLanguage(language === "es" ? "en" : "es");
-
-
+  const { t, ToggleButton } = useLanguage();
 
   useEffect(() => setMounted(true), []);
 
@@ -60,14 +56,7 @@ export default function Home() {
 
       {/* Main */}
       <main className="flex-1 py-10 px-6">
-        <button
-          onClick={toggleLanguage}
-          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition"
-          aria-label="Toggle Dark Mode"
-        >
-          <div className="h-6 w-6">{language === "es" ? "en" : "es"}</div>
-          
-        </button>
+        <ToggleButton/>
         <Section title={"Juegos"} proyects={games} />
       </main>
 
