@@ -1,12 +1,24 @@
 {
-    "title": "Página de Juegos",
     "availableGames": "Juegos Disponibles",
-    "playNow": "Jugar Ahora",
+    "goNow": "Ir Ahora",
     "comingSoon": "Próximamente",
     "footerText": "Todos los derechos reservados.",
-    "switchLanguage": "Cambiar a Inglés",
-    "moves": "Movimientos Totales",
-    "winner": "Ganador",
-    "reset": "Reiniciar"
+    
+    "blueVsRedDescription": "¡Un emocionante juego de estrategia donde Azul debe llegar abajo y Rojo debe capturar!",
+    "higherOrLowerDescription": "¿Puedes adivinar cuál tiene más búsquedas? ¡Inténtalo ahora!",
+    "blueVsRedTitle": "Azul vs Rojo",
+    "higherOrLowerTitle": "Más Alto o Más Bajo",
+    "workingOnMoreGames": "Estamos trabajando en más juegos emocionantes para ti.",
+
+    "back": "Volver",
+    "reset": "Reiniciar",
+    "turnOf": "Turno de:",
+    "red": "Rojo",
+    "blue": "Azul",
+    "winner": "¡{{winner}} gana!",
+    "totalMoves": "Movimientos totales: {{moves}}",
+    "availableCode": "Codigo Disponible"
+  
   }
+  
   

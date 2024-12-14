@@ -1,12 +1,28 @@
 {
-    "title": "Game Page",
     "availableGames": "Available Games",
-    "playNow": "Play Now",
+    "goNow": "Go Now",
+
     "comingSoon": "Coming Soon",
     "footerText": "All rights reserved.",
-    "switchLanguage": "Switch to Spanish",
-    "moves": "Total Moves",
-    "winner": "Winner",
-    "reset": "Restart"
+    
+
+    "blueVsRedDescription": "An exciting strategy game where Blue must reach the bottom, and Red must capture!",
+    "higherOrLowerDescription": "Can you guess which has more searches? Try it now!",
+    "blueVsRedTitle": "Blue vs Red",
+    "higherOrLowerTitle": "Higher or Lower",
+
+
+    "workingOnMoreGames": "We are working on more exciting games for you.",
+
+    "back": "Back",
+    "reset": "Reset",
+    "turnOf": "Turn of:",
+    "red": "Red",
+    "blue": "Blue",
+    "winner": "{{winner}} wins!",
+    "totalMoves": "Total moves: {{moves}}",
+
+    "availableCode": "Available Code"
+    
   }
   

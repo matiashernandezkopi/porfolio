@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/app/context/LanguageContext";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -18,6 +19,8 @@ export default function BlueVsRed() {
   const [moves, setMoves] = useState(0); // Movimientos totales
   const [winner, setWinner] = useState<string | null>(null); // Ganador
 
+  const { t, ToggleButton } = useLanguage();
+
   // Inicializar posiciones al cargar
   useEffect(() => {
     resetGame();
@@ -26,10 +29,10 @@ export default function BlueVsRed() {
   //Comprueba cada turno si rojo gano (si esta a una casilla de azul)
   useEffect(()=>{
     if (circle1 && circle2 && isAdjacent(circle1, circle2)) {
-      setWinner("Rojo");
+      setWinner(t("red"));
       return;
     }
-  },[turn,circle1,circle2])
+  },[turn,circle1,circle2,t])
 
   const resetGame = () => {
     setCircle1({ row: 8, col: generateRandomColumn() }); // Círculo rojo en la fila 8
@@ -76,7 +79,7 @@ export default function BlueVsRed() {
 
       // Verificar si el círculo azul ha llegado al final
       if (newPos.row === 8) {
-        setWinner("Azul");
+        setWinner(t("blue"));
       } else {
         setTurn(1);
         setTimeout(handleRedMove, 500);
@@ -104,18 +107,26 @@ export default function BlueVsRed() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen p-6 bg-gradient-to-tl from-blue-800 to-red-800">
-      <Link href="../../">
-        <div className="absolute top-6 left-6 text-white bg-blue-500 px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 transform hover:scale-105">
-          Volver
-        </div>
-      </Link>
+      
+      <div className="absolute top-6 left-6 text-white flex flex-col gap-10">
+        <Link href="../../">
+          <div className="bg-blue-500 px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 transform hover:scale-105">
+            {t("back")}
+          </div>
+        </Link>
+        <ToggleButton/>
+      </div>
+
+      <h1 className="text-4xl font-bold text-white">
+        {t("blueVsRedTitle")}
+      </h1>
       {/* Cuadrícula */}
       <button
-              onClick={resetGame}
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
-            >
-              Reiniciar
-            </button>
+        onClick={resetGame}
+        className="bg-blue-500 text-white px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
+      >
+        {t("reset")}
+      </button>
       <div className="grid grid-cols-9 gap-1 mt-12">
         {Array.from({ length: 9 }).map((_, row) =>
           Array.from({ length: 9 }).map((_, col) => (
@@ -133,9 +144,9 @@ export default function BlueVsRed() {
 
       {/* Indicador de turno */}
       <div className="mt-6 text-lg font-bold text-black">
-        Turno de:{" "}
+        {t("turnOf")}{" "}
         <span className={turn === 1 ? "text-red-500" : "text-blue-500"}>
-          {turn === 1 ? "Círculo Rojo" : "Círculo Azul"}
+          {turn === 1 ? t("red") : t("blue")}
         </span>
       </div>
 
@@ -143,13 +154,13 @@ export default function BlueVsRed() {
       {winner && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg text-center shadow-lg max-w-sm w-full text-black">
-            <h2 className="text-3xl font-bold mb-4">¡{winner} gana!</h2>
-            <p className="mb-4 text-lg">Movimientos totales: {moves}</p>
+            <h2 className="text-3xl font-bold mb-4">{t("winner", { winner })}</h2>
+            <p className="mb-4 text-lg">{t("totalMoves", { moves })}</p>
             <button
               onClick={resetGame}
               className="bg-blue-500 px-6 py-3 rounded-lg text-xl hover:bg-blue-600 transition duration-200"
             >
-              Reiniciar
+              {t("reset")}
             </button>
           </div>
         </div>

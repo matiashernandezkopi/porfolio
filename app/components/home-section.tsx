@@ -1,6 +1,7 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface Project {
   title: string;
@@ -15,11 +16,12 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({ title,proyects }) => {
     const { theme } = useTheme();
+    const { t } = useLanguage();
 
   return (
     <section className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-gray-200 mb-8 text-left bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-800 w-fit rounded-md p-2">
-        Explora nuestros {title}
+       {title}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {proyects.map((project, index) => (
@@ -44,7 +46,7 @@ const Section: React.FC<SectionProps> = ({ title,proyects }) => {
                         : "bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-800"
                     }`}
                 >
-                  Ir Ahora
+                  {t("goNow")}
                 </div>
               </Link>
             </div>
@@ -55,12 +57,12 @@ const Section: React.FC<SectionProps> = ({ title,proyects }) => {
         <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden">
           <div className="bg-gradient-to-b from-gray-500 to-gray-600 dark:from-gray-700 dark:to-gray-800 h-48 flex items-center justify-center">
             <h3 className="text-xl font-bold text-white group-hover:scale-105 transition">
-              Próximamente
+              {t("comingSoon")}
             </h3>
           </div>
           <div className="p-6">
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Estamos trabajando en más juegos emocionantes para ti.
+              {t("workingOnMoreGames")}
             </p>
           </div>
         </div>

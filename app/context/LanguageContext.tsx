@@ -6,10 +6,11 @@ import es from "../locales/es.json";
 
 type Language = "en" | "es";
 
+
 interface LanguageContextProps {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, variables?: Record<string, string | number>) => string;
   ToggleButton: () => ReactNode;
 }
 
@@ -20,14 +21,23 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(undefine
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     const [language, setLanguage] = useState<Language>("es");
 
-    const t = (key: string) => translations[language][key] || key;
+    const t = (key: string, variables?: Record<string, string | number>): string => {
+      const translation = translations[language][key] || key;
+    
+      if (!variables) return translation;
+    
+      return Object.keys(variables).reduce(
+        (result, variable) => result.replace(`{{${variable}}}`, String(variables[variable])),
+        translation
+      );
+    };
 
     const ToggleButton = () => {
         const toggleLanguage = () => setLanguage(language === "es" ? "en" : "es");
 
         return(<button
           onClick={toggleLanguage}
-          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition"
+          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition w-fit"
           aria-label="Toggle Dark Mode"
         >
           <div className="h-6 w-6">{language === "es" ? "en" : "es"}</div>
