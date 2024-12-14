@@ -1,4 +1,6 @@
 import React from 'react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 export const codeExamples = [
@@ -75,20 +77,24 @@ export const codeExamples = [
 function page() {
     return (
         <div>
-          <h1>Ejemplos de código</h1>
-          <ul>
+        <h1>Ejemplos de código</h1>
+        <ul>
             {codeExamples.map((example) => (
-              <li key={example.name}>
+            <li key={example.name}>
                 <h2>{example.name}</h2>
                 <p>{example.description}</p>
-                <pre>
-                  <code>{example.code}</code>
-                </pre>
-              </li>
+                <SyntaxHighlighter language="jsx" style={oneDark}
+                PreTag="div"
+                className="mockup-code scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded"
+                showLineNumbers={true}
+                useInlineStyles={true}>
+                    {example.code}
+                </SyntaxHighlighter>
+            </li>
             ))}
-          </ul>
+        </ul>
         </div>
-      );
+    );
     }
 
 export default page
