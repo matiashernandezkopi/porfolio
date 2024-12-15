@@ -12,9 +12,10 @@ interface Project {
 interface SectionProps {
   title: string;
   proyects: Project[];
+  subtitle?: string;
 }
 
-const Section: React.FC<SectionProps> = ({ title,proyects }) => {
+const Section: React.FC<SectionProps> = ({ title,proyects, subtitle }) => {
     const { theme } = useTheme();
     const { t } = useLanguage();
 
@@ -29,10 +30,11 @@ const Section: React.FC<SectionProps> = ({ title,proyects }) => {
             key={index}
             className="group bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-2xl transition overflow-hidden"
           >
-            <div className="bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-800 h-48 flex items-center justify-center">
+            <div className="bg-gradient-to-b from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-800 h-48 flex flex-col items-center justify-center">
               <h3 className="text-xl font-bold text-white group-hover:scale-105 transition">
                 {project.title}
               </h3>
+              {subtitle&&(<p>{subtitle}</p>)}
             </div>
             <div className="p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -62,7 +64,7 @@ const Section: React.FC<SectionProps> = ({ title,proyects }) => {
           </div>
           <div className="p-6">
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              {t("workingOnMoreGames")}
+              {t("workingOnMore")}
             </p>
           </div>
         </div>

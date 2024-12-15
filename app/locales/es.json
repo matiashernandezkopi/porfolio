@@ -8,7 +8,7 @@
     "higherOrLowerDescription": "¿Puedes adivinar cuál tiene más búsquedas? ¡Inténtalo ahora!",
     "blueVsRedTitle": "Azul vs Rojo",
     "higherOrLowerTitle": "Más Alto o Más Bajo",
-    "workingOnMoreGames": "Estamos trabajando en más juegos emocionantes para ti.",
+    "workingOnMore": "Estamos trabajando en más proyectos para ti.",
 
     "back": "Volver",
     "reset": "Reiniciar",
@@ -17,7 +17,17 @@
     "blue": "Azul",
     "winner": "¡{{winner}} gana!",
     "totalMoves": "Movimientos totales: {{moves}}",
-    "availableCode": "Codigo Disponible"
+    "availableCode": "Codigo Disponible",
+
+    "codeDescription":"Codigo con logica generica reusable",
+    "firebaseDescription":"Eliminar, crear y mostrar documentos segun user ID, entre otras cosas",
+
+    "higher": "Mayor",
+    "lower": "Menor",
+    "highScore": "Puntuación Máxima",
+    "score": "Puntuación",
+    "caloriesPerUnit": "calorías por {{unit}}",
+    "lostMessage": "¡Has perdido!"
   
   }
   

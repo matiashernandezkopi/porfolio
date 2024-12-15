@@ -12,7 +12,7 @@
     "higherOrLowerTitle": "Higher or Lower",
 
 
-    "workingOnMoreGames": "We are working on more exciting games for you.",
+    "workingOnMore": "We are working on more projects for you.",
 
     "back": "Back",
     "reset": "Reset",
@@ -22,7 +22,16 @@
     "winner": "{{winner}} wins!",
     "totalMoves": "Total moves: {{moves}}",
 
-    "availableCode": "Available Code"
+    "availableCode": "Available Code",
+    "codeDescription": "Generic reusable logic code",
+    "firebaseDescription": "Delete, create, and display documents based on user ID, among other things",
+
+    "higher": "Higher",
+    "lower": "Lower",
+    "highScore": "High Score",
+    "score": "Score",
+    "caloriesPerUnit": "calories per {{unit}}",
+    "lostMessage": "You've lost!"
     
   }
   

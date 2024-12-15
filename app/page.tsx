@@ -30,7 +30,7 @@ export default function Home() {
 
   const code = [
     {
-      title: t("firebaseTitle"),
+      title: "Firebase",
       description:
         t("firebaseDescription"),
       link: "/code/Firebase",
@@ -70,7 +70,7 @@ export default function Home() {
       <main className="flex-1 py-10 px-6">
         <ToggleButton/>
         <Section title={t("availableGames")} proyects={games} />
-        <Section title={t("availableCode")} proyects={code} />
+        <Section title={t("availableCode")} proyects={code} subtitle={t("codeDescription")} />
       </main>
 
       {/* Footer */}

@@ -21,7 +21,7 @@ export  const CodeShower:React.FC<codeshowerprops> = ({code}) => {
   return (
     
 
-    <div className=' max-w-4xl min-w-[25rem] rounded-md overflow-hidden h-fit bg-[#3a404d]'>
+    <div className=' max-w-full rounded-md overflow-hidden h-fit bg-[#3a404d]'>
         <div className='flex justify-between px-4 text-white text-xs items-center'>
             <h2 className='text-sm'>{code.name}</h2>
             {!copyed ? (<button className='py-1  inline-flex items-center gap-1'

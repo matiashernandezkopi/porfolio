@@ -1,7 +1,7 @@
 "use client";
 
+import BackButton from "@/app/components/back-button";
 import { useLanguage } from "@/app/context/LanguageContext";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 
 // Funciones auxiliares
@@ -109,11 +109,7 @@ export default function BlueVsRed() {
     <div className="flex flex-col items-center justify-center h-screen w-screen p-6 bg-gradient-to-tl from-blue-800 to-red-800">
       
       <div className="absolute top-6 left-6 text-white flex flex-col gap-10">
-        <Link href="../../">
-          <div className="bg-blue-500 px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 transform hover:scale-105">
-            {t("back")}
-          </div>
-        </Link>
+        <BackButton/>
         <ToggleButton/>
       </div>
 

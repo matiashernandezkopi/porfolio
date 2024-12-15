@@ -1,11 +1,10 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import en from "../locales/en.json";
 import es from "../locales/es.json";
 
 type Language = "en" | "es";
-
 
 interface LanguageContextProps {
   language: Language;
@@ -19,34 +18,51 @@ const translations: Record<Language, Record<string, string>> = { en, es };
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-    const [language, setLanguage] = useState<Language>("es");
+  const [language, setLanguage] = useState<Language>("es");
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("language");
+    setLanguage(storedLanguage as Language || "es");
+  }, []);
 
-    const t = (key: string, variables?: Record<string, string | number>): string => {
-      const translation = translations[language][key] || key;
+  const t = (key: string, variables?: Record<string, string | number>): string => {
+    const translation = translations[language][key] || key;
+
+    if (!variables) return translation;
+
+    return Object.keys(variables).reduce(
+      (result, variable) => result.replace(`{{${variable}}}`, String(variables[variable])),
+      translation
+    );
+  };
+
+  
+  const setLanguageAndSave = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem("language", lang);
+  };
+
+  
+  const ToggleButton = () => {
+    const toggleLanguage = () => setLanguageAndSave(language === "es" ? "en" : "es");
+
+    return (
+      <button
+        onClick={toggleLanguage}
+        className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition w-fit"
+        aria-label="Toggle Language"
+      >
+        <div className="h-6 w-6">{language === "es" ? "en" : "es"}</div>
+      </button>
+    );
+  };
+
+  useEffect(() => {
+    localStorage.setItem("language", language);
     
-      if (!variables) return translation;
-    
-      return Object.keys(variables).reduce(
-        (result, variable) => result.replace(`{{${variable}}}`, String(variables[variable])),
-        translation
-      );
-    };
-
-    const ToggleButton = () => {
-        const toggleLanguage = () => setLanguage(language === "es" ? "en" : "es");
-
-        return(<button
-          onClick={toggleLanguage}
-          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition w-fit"
-          aria-label="Toggle Dark Mode"
-        >
-          <div className="h-6 w-6">{language === "es" ? "en" : "es"}</div>
-          
-        </button>)
-    }
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, ToggleButton }}>
+    <LanguageContext.Provider value={{ language, setLanguage: setLanguageAndSave, t, ToggleButton }}>
       {children}
     </LanguageContext.Provider>
   );
