@@ -32,9 +32,9 @@ export default function Home() {
     setCurrent(nextCurrent);
     setNext(nextNext);
   }, []); // Se ejecuta solo una vez después del montaje
-  if (!current||!next) {
-    return
-  }
+
+  if (!current || !next) return <div>Loading...</div>; // Asegura que el componente no se renderice sin datos
+  
   const handleGuess = (guess: string) => {
     const correct = guess === (next.calorias > current.calorias ? 'higher' : 'lower');
 
@@ -57,7 +57,6 @@ export default function Home() {
     }
   };
 
-  if (!current || !next) return <div>Loading...</div>; // Asegura que el componente no se renderice sin datos
 
   return (
     <div className="flex flex-col items-center h-screen">
