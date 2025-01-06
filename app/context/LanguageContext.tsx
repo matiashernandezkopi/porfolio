@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import Image from 'next/image';
 import en from "../locales/en.json";
 import es from "../locales/es.json";
 
@@ -51,7 +52,25 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:opacity-80 transition w-fit"
         aria-label="Toggle Language"
       >
-        <div className="h-6 w-6">{language === "es" ? "en" : "es"}</div>
+        <div className="h-6 w-6 relative">
+        {language === "es" ? (
+          <Image 
+            src="/uk.png" 
+            alt="English" 
+            layout="fill" 
+            objectFit="contain" 
+          />
+        ) : (
+          <Image 
+            src="/spain.png" 
+            alt="Español" 
+            layout="fill" 
+            objectFit="contain" 
+          />
+        )}
+      </div>
+
+
       </button>
     );
   };
