@@ -54,6 +54,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
+
+      <div>borrar luego</div>
+
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-500 to-blue-700 dark:from-blue-700 dark:to-blue-900 text-white py-6 px-10 shadow-lg">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
