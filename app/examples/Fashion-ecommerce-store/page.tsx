@@ -1,5 +1,7 @@
 'use client'
 import { useLanguage } from "@/app/context/LanguageContext";
+import Image from 'next/image';
+import HoverImage from "./clothe";
 
 function Page() {
   const { t } = useLanguage();
@@ -57,20 +59,45 @@ function Page() {
           <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
             {t("featuredProducts")}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Product Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
-              <img src="/path-to-image.jpg" alt="Product" className="w-full h-56 object-cover" />
-              <div className="p-6">
+          
+          
+          
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Product Card */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                <HoverImage />
+                <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Elegant Blazer</h4>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">$129.99</p>
                 <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
                   {t("buyNow")}
                 </button>
+                </div>
+              </div>
+              {/* Repeat the cards for other products */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                <HoverImage />
+                <div className="p-6">
+                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Stylish Dress</h4>
+                <p className="text-gray-600 dark:text-gray-300 mt-2">$89.99</p>
+                <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
+                  {t("buyNow")}
+                </button>
+                </div>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                <HoverImage />
+                <div className="p-6">
+                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Casual Shirt</h4>
+                <p className="text-gray-600 dark:text-gray-300 mt-2">$49.99</p>
+                <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
+                  {t("buyNow")}
+                </button>
+                </div>
               </div>
             </div>
-            {/* Repite las tarjetas para otros productos */}
-          </div>
+
         </section>
       </main>
 
