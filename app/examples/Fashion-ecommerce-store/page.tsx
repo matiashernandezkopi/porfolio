@@ -3,6 +3,33 @@ import { useLanguage } from "@/app/context/LanguageContext";
 import Image from 'next/image';
 import HoverImage from "./clothe";
 
+export const batmanMan = {
+  gender: "man",
+  name: "Batman",
+  price: 20,
+  colors: {
+    clasic: [
+      "/batman/batman-front.webp",
+      "/batman/batman-side.webp",
+      "/batman/batman-back.webp",
+    ],
+    black: [
+      "/batman/batman-black-front.webp",
+      "/batman/batman-black-back.webp",
+    ],
+    blackRed: [
+      "/batman/batman-blackRed-front.webp",
+      "/batman/batman-blackRed-back.webp",
+    ],
+    blueWhite: [
+      "/batman/batman-blueWhite-front.webp",
+    ],
+    whiteBlack: [
+      "/batman/batman-whiteBlack-front.webp"
+    ]
+  }
+}
+
 function Page() {
   const { t } = useLanguage();
 
@@ -60,44 +87,20 @@ function Page() {
             {t("featuredProducts")}
           </h3>
           
-          
-          
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Product Card */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
-                <HoverImage />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Object.entries(batmanMan.colors).map(([color, images]) => (
+              <div key={color} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                <HoverImage images={images} />
                 <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Elegant Blazer</h4>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">$129.99</p>
-                <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-                  {t("buyNow")}
-                </button>
+                  <h4 className="text-xl font-semibold text-gray-800 dark:text-white">{`${batmanMan.name} - ${color}`}</h4>
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">${batmanMan.price}</p>
+                  <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
+                    {t("buyNow")}
+                  </button>
                 </div>
               </div>
-              {/* Repeat the cards for other products */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
-                <HoverImage />
-                <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Stylish Dress</h4>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">$89.99</p>
-                <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-                  {t("buyNow")}
-                </button>
-                </div>
-              </div>
-              
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
-                <HoverImage />
-                <div className="p-6">
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">Casual Shirt</h4>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">$49.99</p>
-                <button className="mt-4 bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-                  {t("buyNow")}
-                </button>
-                </div>
-              </div>
-            </div>
-
+            ))}
+          </div>
         </section>
       </main>
 
