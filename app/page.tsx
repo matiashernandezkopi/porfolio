@@ -66,9 +66,9 @@ export default function Home() {
       {/* Main */}
       <main className="flex-1 py-10 px-6">
         <ToggleButton/>
+        <Section title={t("availableCode")} proyects={examples} subtitle={t("codeDescription")} />
         <Section title={t("availableGames")} proyects={games} />
         <Section title={t("availableCode")} proyects={code} subtitle={t("codeDescription")} />
-        <Section title={t("availableCode")} proyects={examples} subtitle={t("codeDescription")} />
       </main>
 
       {/* Footer */}

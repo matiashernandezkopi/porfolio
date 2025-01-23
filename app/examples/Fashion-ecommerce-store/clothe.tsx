@@ -31,21 +31,21 @@ const HoverImage: React.FC<HoverImageProps> = ({ images }) => {
 
     return (
         <div
-            className="relative overflow-hidden"
+            className="relative overflow-hidden w-64 h-64"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => {
-                setIsHovered(false);
-                setCurrentImage(0);
+            setIsHovered(false);
+            setCurrentImage(0);
             }}
         >
-            <div className="w-full h-full">
-                <Image
-                    src={imageList[currentImage]}
-                    alt="Batman"
-                    width={256}
-                    height={256}
-                    className="object-cover w-full"
-                />
+            <div className="w-full h-full bg-white absolute top-0 left-0 z-10 flex items-center justify-center">
+            <Image
+                src={imageList[currentImage]}
+                alt="Image"
+                width={256}
+                height={256}
+                className="object-cover w-fit h-full"
+            />
             </div>
         </div>
     );
