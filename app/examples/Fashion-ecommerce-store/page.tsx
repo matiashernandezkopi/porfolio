@@ -1,7 +1,5 @@
 'use client'
 import { useLanguage } from "@/app/context/LanguageContext";
-import Image from 'next/image';
-import HoverImage from "./clothe";
 import { batmanMan, ironmanMan, spidermanMan, supermanMan } from "./clothe-DB";
 import ClotheList from "./clothe-lists";
 

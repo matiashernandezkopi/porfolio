@@ -1,5 +1,3 @@
-import exp from "constants"
-
 export const batmanMan = {
   gender: "man",
   name: "Batman",
@@ -40,7 +38,7 @@ export const ironmanMan = {
   }
 }
 
-
+//to-do
 export const batmanWoman = {
   gender: "woman",
   name: "Batman",
@@ -58,10 +56,6 @@ export const spidermanMan = {
   name: "Spiderman",
   price: 25,
   colors: {
-    blackRed: [
-      "/spiderman/spiderman-blackRed-front.webp",
-      "/spiderman/spiderman-blackRed-back.webp",
-    ],
     blackWhite: [
       "/spiderman/spiderman-blackWhite-front.webp",
       "/spiderman/spiderman-blackWhite-back.webp",
@@ -71,10 +65,6 @@ export const spidermanMan = {
     ],
     blueWhite: [
       "/spiderman/spiderman-blueWhite-front.webp",
-    ],
-    greyBlack: [
-      "/spiderman/spiderman-greyBlack-front.webp",
-      "/spiderman/spiderman-greyBlack-back.webp",
     ],
     greyWhite: [
       "/spiderman/spiderman-greyWhite-front.webp",
@@ -87,6 +77,16 @@ export const spidermanMan = {
     ],
     white: [
       "/spiderman/spiderman-white-front.webp",
+    ],
+  },
+  long: {
+    blackRed: [
+      "/spiderman/spiderman-blackRed-front.webp",
+      "/spiderman/spiderman-blackRed-back.webp",
+    ],
+    greyBlack: [
+      "/spiderman/spiderman-greyBlack-front.webp",
+      "/spiderman/spiderman-greyBlack-back.webp",
     ],
   }
 }
@@ -105,19 +105,21 @@ export const supermanMan = {
     black: [
       "/superman/superman-black-front.webp",
     ],
-    blackLong: [
-      "/superman/superman-black-front-long.webp",
-    ],
     blackRed: [
       "/superman/superman-blackRed-front.webp",
-    ],
-    blackRedLong: [
-      "/superman/superman-blackRed-front-long.webp",
     ],
     blackWhite: [
       "/superman/superman-blackWhite-front.webp",
     ],
-    blackWhiteLong: [
+  },
+  long: {
+    black: [
+      "/superman/superman-black-front-long.webp",
+    ],
+    blackRed: [
+      "/superman/superman-blackRed-front-long.webp",
+    ],
+    blackWhite: [
       "/superman/superman-blackWhite-front-long.webp",
     ],
   }
