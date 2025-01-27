@@ -9,7 +9,7 @@ export const codeExamples = [
       code: `export async function addDocument(userId: string, Document: yourType) {
     try {
     const docRef = await addDoc(collection(db, 'collectionName'), {
-        ...data,
+        ...Document,
         id: uuidv4(),
         userID: userId,
     });

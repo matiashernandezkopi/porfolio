@@ -1,7 +1,9 @@
+/*
 export const batmanMan = {
   gender: "man",
   name: "Batman",
   price: 20,
+  id: "1",
   colors: {
     clasic: [
       "/batman/batman-front.webp",
@@ -25,10 +27,12 @@ export const batmanMan = {
   }
 }
 
+
 export const ironmanMan = {
   gender: "man",
   name: "Ironman",
   price: 25,
+  id: "2",
   colors: {
     clasic: [
       "/ironman/ironman-front.webp",
@@ -43,6 +47,7 @@ export const batmanWoman = {
   gender: "woman",
   name: "Batman",
   price: 20,
+  id: "3",
   colors: {
     clasic: [
       "/batman/batman-front.jpg",
@@ -55,6 +60,7 @@ export const spidermanMan = {
   gender: "man",
   name: "Spiderman",
   price: 25,
+  id: "4",
   colors: {
     blackWhite: [
       "/spiderman/spiderman-blackWhite-front.webp",
@@ -95,6 +101,7 @@ export const supermanMan = {
   gender: "man",
   name: "Superman",
   price: 25,
+  id: "5",
   colors: {
     blue: [
       "/superman/superman-blue-front.webp",
@@ -124,3 +131,5 @@ export const supermanMan = {
     ],
   }
 }
+
+*/

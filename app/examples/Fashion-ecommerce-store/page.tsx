@@ -1,11 +1,27 @@
 'use client'
 import { useLanguage } from "@/app/context/LanguageContext";
-import { batmanMan, ironmanMan, spidermanMan, supermanMan } from "./clothe-DB";
+import { useEffect, useState } from "react";
+import { getAllDocuments } from "./firebase/clothes";
 import ClotheList from "./clothe-lists";
-
+import { ClotheListProps } from "./types.t";
 
 function Page() {
   const { t } = useLanguage();
+  const [clothes, setClothes] = useState<ClotheListProps["item"][]>([]);
+
+  useEffect(() => {
+    async function fetchClothes() {
+      try {
+        const fetchedClothes = await getAllDocuments();
+        console.log(fetchedClothes);
+        setClothes(fetchedClothes);
+      } catch (error) {
+        console.error("Error fetching clothes: ", error);
+      }
+    }
+
+    fetchClothes();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
@@ -56,17 +72,9 @@ function Page() {
         </section>
 
         {/* Productos Destacados */}
-        
-          
-          <ClotheList item={batmanMan} />
-          <ClotheList item={ironmanMan} />
-          
-          <ClotheList item={spidermanMan} />
-          <ClotheList item={supermanMan} />
-
-
-
-        
+        {clothes.map((item) => (
+          <ClotheList key={item.id} item={item} />
+        ))}
       </main>
 
       {/* Footer */}

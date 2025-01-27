@@ -2,13 +2,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { getDocumentbyid } from '../firebase/clothes';
 
 interface ClotheListProps {
   item: {
     gender: string;
     name: string;
     price: number;
-    colors: {
+    id: string;
+    colors?: {
       [key: string]: string[];
     };
     long?: {
@@ -25,24 +27,25 @@ const Page = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const productParam = searchParams.get('product');
+    const productId = searchParams.get('id');
     const colorParam = searchParams.get('color');
     const longParam = searchParams.get('long');
 
-    if (productParam) {
-      try {
-        const parsedProduct = JSON.parse(decodeURIComponent(productParam));
-        setProduct(parsedProduct);
+    if (productId) {
+      getDocumentbyid(productId)
+        .then((fetchedProduct) => {
+          setProduct(fetchedProduct);
 
-        if (parsedProduct.colors) {
-          setSelectedColor(colorParam || Object.keys(parsedProduct.colors)[0]);
-        }
-        if (parsedProduct.long) {
-          setIsLong(longParam === 'true');
-        }
-      } catch (error) {
-        console.error('Error al parsear el producto desde la URL:', error);
-      }
+          if (fetchedProduct.colors) {
+            setSelectedColor(colorParam || Object.keys(fetchedProduct.colors)[0]);
+          }
+          if (fetchedProduct.long) {
+            setIsLong(longParam === 'true');
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching product from Firebase:', error);
+        });
     }
   }, [searchParams]);
 
@@ -58,7 +61,7 @@ const Page = () => {
   const images =
     isLong && product.long
       ? product.long[selectedColor] || []
-      : product.colors[selectedColor] || [];
+      : (product.colors ? product.colors[selectedColor] : []);
 
   const getColorStyle = (color: string) => {
     return { backgroundColor: color.toLowerCase() };
@@ -72,7 +75,7 @@ const Page = () => {
         <label className="block text-lg font-medium text-gray-700 dark:text-gray-300">Choose a color:</label>
         <div className="flex space-x-2 mt-2">
           {Object.keys(
-            isLong && product.long ? product.long : product.colors
+            isLong && product.long ? product.long : product.colors || {}
           ).map((color) => (
             <button
               key={color}
