@@ -45,7 +45,7 @@ export const ironmanMan = {
 //to-do
 export const batmanWoman = {
   gender: "woman",
-  name: "Batman",
+  name: "Fem Batman",
   price: 20,
   id: "3",
   colors: {

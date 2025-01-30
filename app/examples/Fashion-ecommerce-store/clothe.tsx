@@ -17,6 +17,8 @@ const HoverImage: React.FC<HoverImageProps> = ({ images }) => {
 
     const imageList = images && images.length > 0 ? images : defaultImages;
 
+    console.log(imageList);
+
     useEffect(() => {
         let interval: NodeJS.Timeout | undefined;
         if (isHovered) {

@@ -3,6 +3,7 @@
 import { db } from './config';
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc, updateDoc, DocumentReference, getDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid'; // Importa uuid para generar un ID único
+import { ClotheListProps } from '../types.t';
 
 
 
@@ -39,26 +40,23 @@ export async function updateDocumentbyid( id: string, Document: ClotheListProps[
 
 
 
+/*
+example of a document in the collection "clothes":
+    color: "images/Batman-man/black"
+    gender:"male"
+    id:"test"
+    long:false
+    name:"Batman Classic"
+    type:"sport hero t-shirt"
+    price:25
+    sizes:["M","L","XL"]
 
-
-
-
-
-interface ClotheListProps {
-    item: {
-        gender: string;
-        name: string;
-        price: number;
-        id: string;
-        ref?: string; // Cambiado a cadena porque no es un DocumentReference real
-        colors?: {
-            [key: string]: string[]; // Llave dinámica con valores tipo array
-        };
-        long?: {
-            [key: string]: string[];
-        };
-    };
-}
+images/Batman:
+    black: [
+        "/batman/batman-black-front.webp",
+        "/batman/batman-black-back.webp",
+    ],
+*/
 
 export async function getAllDocuments(): Promise<ClotheListProps["item"][]> {
     try {
@@ -68,35 +66,53 @@ export async function getAllDocuments(): Promise<ClotheListProps["item"][]> {
 
         const documents = await Promise.all(
             snapshot.docs.map(async (docSnapshot) => {
-                // Obtener los datos principales del documento
                 const data = {
                     id: docSnapshot.id,
                     ...docSnapshot.data(),
                 } as ClotheListProps["item"];
-
-                // Si existe una referencia "ref" como cadena, buscamos sus datos
-                let colors: ClotheListProps["item"]["colors"] = undefined;
-                if (data.ref) {
+        
+                let colors: string[] = [];
+                const colorsplited = data.color.split('/'); // "images/Batman-man/black" => ["images", "Batman-man", "black"]
+                
+                if (colorsplited.length === 3) {
+                    const collectionName = colorsplited[0]; // "images"
+                    const documentName = colorsplited[1]; // "Batman-man"
+        
                     try {
-                        // Convertimos la cadena `ref` en una referencia a un documento
-                        const refDoc = doc(db, data.ref);
+                        // Referencia al documento "images/Batman-man"
+                        const refDoc = doc(db, collectionName, documentName); // const refDoc = doc(db, collectionName+"/"+ documentName)
                         const refSnapshot = await getDoc(refDoc);
+        
+                        /*if (refSnapshot.exists()) {
+                            const colorField = colorsplited[2];
+        
+                            // Extrae la lista de colores de la propiedad correspondiente
+                            const colorData = refSnapshot.data() as Record<string, string[]>;
+                            colors = colorData[colorField] || []; // Obtiene el array asociado a "black"
+                        }*/
+
                         if (refSnapshot.exists()) {
-                            colors = refSnapshot.data() as ClotheListProps["item"]["colors"];
+                            const colorField = colorsplited[2];
+                            const fieldValue = refSnapshot.get(colorField);
+                            if (Array.isArray(fieldValue)) {
+                                colors = fieldValue as string[]; // Guardar el resultado si es una lista de colores
+                            } else {
+                                console.warn(`El campo "${colorField}" no contiene una lista de colores.`);
+                            }
                         }
                     } catch (error) {
-                        console.error(`Error fetching data from ref in document ${docSnapshot.id}:`, error);
+                        console.error(`Error fetching data from colors in document ${docSnapshot.id}:`, error);
                     }
                 }
-
                 return {
                     ...data,
-                    colors, // Agregamos los datos de la referencia al campo "colors"
+                    colors,
                 };
             })
         );
-
+        
         return documents;
+
     } catch (error) {
         console.error("Error fetching documents:", error);
         throw error;
