@@ -9,13 +9,17 @@ function Page() {
   const collection: string[] = ["Batman"];
   const { t } = useLanguage();
   const [clothes, setClothes] = useState<ClotheListProps["item"][]>([]);
+  const [collectionColors, setCollectionColors] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchClothes() {
       try {
         const fetchedClothes = await getAllDocumentsByCollection("Batman");
-        console.log(fetchedClothes);
+        
         setClothes(fetchedClothes);
+        setCollectionColors(fetchedClothes.map((item) => item.color));
+        console.log(collectionColors);
+
       } catch (error) {
         console.error("Error fetching clothes: ", error);
       }
@@ -82,7 +86,7 @@ function Page() {
             {/* Productos Destacados */}
             {clothes.map((item) => (
               
-              <ClotheList key={item.id} item={item} />
+              <ClotheList key={item.id} item={item}  collectionColors={collectionColors}/>
             ))}
             </div>
         </section>

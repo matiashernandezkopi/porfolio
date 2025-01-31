@@ -6,11 +6,17 @@ import { useLanguage } from '@/app/context/LanguageContext';
 import Link from 'next/link';
 import { ClotheListProps } from './types.t';
 
-const ClotheList: React.FC<ClotheListProps> = ({ item }) => {
+interface ClotheListPropsNew {
+    item: ClotheListProps["item"];
+    collectionColors: string[];
+}
+
+
+const ClotheList: React.FC<ClotheListPropsNew> = ({ item,collectionColors }) => {
     const { t } = useLanguage();
 
     const getProductParam = () => {
-        return `name=${item.name}&color=${item.color}&long=${item.long}&collection=${item.collection}`;
+        return `name=${item.name}&color=${item.color}&long=${item.long}&collection=${item.collection}&collectionColors=${collectionColors.join(',')}`;
     };
 
     const colorImages = Array.isArray(item.colors) ? item.colors : [item.colors];
