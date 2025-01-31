@@ -2,22 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { getDocumentbyid } from '../firebase/clothes';
+import { getDocumentbyname } from '../firebase/clothes';
+import { ClotheListProps } from '../types.t';
 
-interface ClotheListProps {
-  item: {
-    gender: string;
-    name: string;
-    price: number;
-    id: string;
-    colors?: {
-      [key: string]: string[];
-    };
-    long?: {
-      [key: string]: string[];
-    };
-  };
-}
+
+
+
+ 
+  
 
 const Page = () => {
   const [product, setProduct] = useState<ClotheListProps["item"] | null>(null);
@@ -27,12 +19,13 @@ const Page = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const productId = searchParams.get('id');
+    const productCollection = searchParams.get('collection');
+    console.log(productCollection);
     const colorParam = searchParams.get('color');
     const longParam = searchParams.get('long');
 
-    if (productId) {
-      getDocumentbyid(productId)
+    if (productCollection) {
+      getDocumentbyname(productCollection, colorParam || '')
         .then((fetchedProduct) => {
           setProduct(fetchedProduct);
 
@@ -58,11 +51,7 @@ const Page = () => {
 
   if (!product) return <p>Cargando...</p>;
 
-  const images =
-    isLong && product.long
-      ? product.long[selectedColor] || []
-      : (product.colors ? product.colors[selectedColor] : []);
-
+  
   const getColorStyle = (color: string) => {
     return { backgroundColor: color.toLowerCase() };
   };
@@ -112,8 +101,8 @@ const Page = () => {
         </div>
       )}
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {images.length > 0 ? (
-          images.map((image, index) => (
+        {product.colors.length > 0 ? (
+          product.colors.map((image: string, index: number) => (
             <img
               key={index}
               src={image}

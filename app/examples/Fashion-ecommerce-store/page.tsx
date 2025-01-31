@@ -1,18 +1,19 @@
 'use client'
 import { useLanguage } from "@/app/context/LanguageContext";
 import { useEffect, useState } from "react";
-import { getAllDocuments } from "./firebase/clothes";
+import { getAllDocumentsByCollection } from "./firebase/clothes";
 import ClotheList from "./clothe-lists";
 import { ClotheListProps } from "./types.t";
 
 function Page() {
+  const collection: string[] = ["Batman"];
   const { t } = useLanguage();
   const [clothes, setClothes] = useState<ClotheListProps["item"][]>([]);
 
   useEffect(() => {
     async function fetchClothes() {
       try {
-        const fetchedClothes = await getAllDocuments();
+        const fetchedClothes = await getAllDocumentsByCollection("Batman");
         console.log(fetchedClothes);
         setClothes(fetchedClothes);
       } catch (error) {
@@ -71,10 +72,22 @@ function Page() {
           </button>
         </section>
 
-        {/* Productos Destacados */}
-        {clothes.map((item) => (
-          <ClotheList key={item.id} item={item} />
+        {collection.map((collection, index) => (
+            <section key={index} className="py-16">
+            <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+          {collection}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Productos Destacados */}
+            {clothes.map((item) => (
+              
+              <ClotheList key={item.id} item={item} />
+            ))}
+            </div>
+        </section>
         ))}
+        
       </main>
 
       {/* Footer */}

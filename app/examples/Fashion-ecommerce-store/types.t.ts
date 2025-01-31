@@ -6,9 +6,11 @@ export interface ClotheListProps {
       name: string;
       price: number;
       id: string;
-      color: string;
+      colorsRef: string;
+      color:string
       long: boolean;
       sizes:Array<string>;
       colors: string[];
+      collection: string;
   };
 }
