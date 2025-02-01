@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { getAllDocumentsByCollection } from "./firebase/clothes";
 import ClotheList from "./clothe-lists";
 import { ClotheListProps } from "./types.t";
+import Footer from "./components/footer";
+import Link from "next/link";
+import Header from "./components/header";
 
 function Page() {
   const collection: string[] = ["Batman"];
@@ -31,35 +34,7 @@ function Page() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       {/* Barra superior */}
-      <div className="bg-gray-800 text-white text-sm py-2 px-4 text-center">
-        <p>{t("freeShipping")} $100</p>
-      </div>
-
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg shadow-md">
-        <div className="flex justify-between items-center max-w-7xl mx-auto py-4 px-6">
-          <h1 className="text-4xl font-extrabold tracking-wide text-gray-800 dark:text-white">
-            Chimbi Fashion
-          </h1>
-          <nav className="flex space-x-6">
-            <a href="#home" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
-              {t("home")}
-            </a>
-            <a href="#about" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
-              {t("about")}
-            </a>
-            <a href="#shop" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
-              {t("shop")}
-            </a>
-            <a href="#contact" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
-              {t("contact")}
-            </a>
-          </nav>
-          <button className="ml-4 bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-            {t("shopNow")}
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* Main */}
       <main className="flex-1 py-10 px-6 max-w-7xl mx-auto">
@@ -95,45 +70,7 @@ function Page() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div>
-            <h4 className="font-semibold mb-4">Chimbi Fashion</h4>
-            <p className="text-sm text-gray-400">
-              {t("footerAbout")}
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">{t("customerService")}</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">{t("faq")}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">{t("returns")}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">{t("shippingInfo")}</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">{t("aboutUs")}</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">{t("ourStory")}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">{t("sustainability")}</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">{t("followUs")}</h4>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">
-                <img src="/icons/facebook.svg" alt="Facebook" className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <img src="/icons/instagram.svg" alt="Instagram" className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <img src="/icons/twitter.svg" alt="Twitter" className="h-6 w-6" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }

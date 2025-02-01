@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getDocumentbyname } from '../firebase/clothes';
 import { ClotheListProps } from '../types.t';
+import Link from 'next/link';
+import { useLanguage } from '@/app/context/LanguageContext';
 
 
 
@@ -12,6 +14,7 @@ import { ClotheListProps } from '../types.t';
   
 
 const Page = () => {
+  const { t } = useLanguage();
   const [product, setProduct] = useState<ClotheListProps["item"] | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [isLong, setIsLong] = useState<boolean>(false);
@@ -65,6 +68,10 @@ const Page = () => {
 
   return (
     <div className="h-screen bg-gray-50 dark:bg-gray-900 flex flex-row-reverse items-center justify-center">
+      <Link href="/examples/Fashion-ecommerce-store" 
+      className=" absolute left-10 top-10 bg-gray-800 text-white px-8 py-3 rounded-full shadow-lg hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-lg font-medium transition">
+          {t("back")}
+      </Link>
       <div className='flex flex-col items-center  border-2 border-gray-200 dark:border-gray-700 rounded-lg p-8 h-2/3  justify-between'>
 
         <h1 className="text-4xl font-extrabold tracking-wide text-gray-800 dark:text-white ">{product.name}</h1>
