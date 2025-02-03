@@ -1,23 +1,31 @@
 'use client'
 import { useLanguage } from "@/app/context/LanguageContext";
 import { useEffect, useState } from "react";
-import { getAllDocumentsByCollection } from "./firebase/clothes";
+import { getAllDocuments } from "./firebase/clothes";
 import ClotheList from "./clothe-lists";
 import { ClotheListProps } from "./types.t";
 import Footer from "./components/footer";
-import Link from "next/link";
 import Header from "./components/header";
 
 function Page() {
-  const collection: string[] = ["Batman"];
+  
   const { t } = useLanguage();
   const [clothes, setClothes] = useState<ClotheListProps["item"][]>([]);
   const [collectionColors, setCollectionColors] = useState<string[]>([]);
+  const [collection, setCollection] = useState<string[]>([]);
+
+
+  useEffect(() => {
+    const uniqueCollections = Array.from(new Set(clothes.map((item) => item.collection)));
+    setCollection(uniqueCollections);
+  }, [clothes]);
+
+
 
   useEffect(() => {
     async function fetchClothes() {
       try {
-        const fetchedClothes = await getAllDocumentsByCollection("Batman");
+        const fetchedClothes = await getAllDocuments();
         
         setClothes(fetchedClothes);
         setCollectionColors(fetchedClothes.map((item) => item.color));

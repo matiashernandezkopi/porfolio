@@ -5,8 +5,8 @@ const Footer: React.FC = () => {
     const { t } = useLanguage();
 
     return (
-        <footer className="bg-gray-800 text-white py-12">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <footer className="bg-gray-800 text-white p-12 flex justify-center">
+            <div className="max-w-7xl grid  grid-cols-2  sm:flex sm:justify-around gap-16  w-full">
                 <div>
                     <h4 className="font-semibold mb-4">Chimbi Fashion</h4>
                     <p className="text-sm text-gray-400">
@@ -32,13 +32,13 @@ const Footer: React.FC = () => {
                     <h4 className="font-semibold mb-4">{t("followUs")}</h4>
                     <div className="flex space-x-4">
                         <a href="#" className="text-gray-400 hover:text-white">
-                            <img src="/icons/facebook.svg" alt="Facebook" className="h-6 w-6" />
+                            <img src="/icons/facebook.png" alt="Facebook" className="h-6 w-6" />
                         </a>
                         <a href="#" className="text-gray-400 hover:text-white">
-                            <img src="/icons/instagram.svg" alt="Instagram" className="h-6 w-6" />
+                            <img src="/icons/instagram.webp" alt="Instagram" className="h-6 w-6" />
                         </a>
                         <a href="#" className="text-gray-400 hover:text-white">
-                            <img src="/icons/twitter.svg" alt="Twitter" className="h-6 w-6" />
+                            <img src="/icons/twitter.webp" alt="Twitter" className="h-6 w-6" />
                         </a>
                     </div>
                 </div>

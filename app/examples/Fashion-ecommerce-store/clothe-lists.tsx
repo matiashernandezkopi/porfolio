@@ -11,8 +11,7 @@ interface ClotheListPropsNew {
     collectionColors: string[];
 }
 
-
-const ClotheList: React.FC<ClotheListPropsNew> = ({ item,collectionColors }) => {
+const ClotheList: React.FC<ClotheListPropsNew> = ({ item, collectionColors }) => {
     const { t } = useLanguage();
 
     const getProductParam = () => {
@@ -20,18 +19,17 @@ const ClotheList: React.FC<ClotheListPropsNew> = ({ item,collectionColors }) => 
     };
 
     const colorImages = Array.isArray(item.colors) ? item.colors : [item.colors];
-    
+
+    const formatName = (name: string) => {
+        return name.replace(/([A-Z])/g, ' $1').trim();
+    };
 
     return (
-        
-
-        <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition w-64"
-        >
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition w-64">
             <HoverImage images={colorImages} />
             <div className="p-6">
                 <h4 className="text-xl font-semibold text-gray-800 dark:text-white">
-                    {`${item.name} - ${item.colorsRef || 'default color'}`}
+                    {formatName(item.name)}
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">${item.price}</p>
                 <Link href={`/examples/Fashion-ecommerce-store/buy?${getProductParam()}`}>
@@ -41,7 +39,6 @@ const ClotheList: React.FC<ClotheListPropsNew> = ({ item,collectionColors }) => 
                 </Link>
             </div>
         </div>
-            
     );
 };
 

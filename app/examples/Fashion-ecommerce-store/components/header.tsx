@@ -20,9 +20,9 @@ const Header = () => {
                     <Link href="/examples/Fashion-ecommerce-store/about" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
                         {t("about")}
                     </Link>
-                    <a href="#shop" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
-                        Shop
-                    </a>
+                    <Link href="/examples/Fashion-ecommerce-store/shop" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
+                        {t("shop")}
+                    </Link>
                     <a href="#contact" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition">
                         Contact
                     </a>
