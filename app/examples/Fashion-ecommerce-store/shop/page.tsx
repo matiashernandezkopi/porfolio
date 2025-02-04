@@ -5,23 +5,11 @@ import { getAllDocuments } from '../firebase/clothes';
 import ClotheList from '../clothe-lists';
 import { Slider } from "@/components/ui/slider";
 
-interface Item {
-    gender: string;
-    name: string;
-    price: number;
-    id: string;
-    colorsRef: string;
-    color: string;
-    long: boolean;
-    sizes: Array<string>;
-    colors: string[];
-    collection: string;
-}
 
 const sizeOptions = ['Any','S', 'M', 'L', 'XL'];
 
 const ShopPage: React.FC = () => {
-    const [items, setItems] = useState<Item[]>([]);
+    const [items, setItems] = useState<ClotheListProps["item"][]>([]);
     const [gender, setGender] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<number | null>(null);

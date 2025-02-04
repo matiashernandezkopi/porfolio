@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getDocumentbyname } from '../firebase/clothes';
-import { ClotheListProps } from '../types.t';
 import Link from 'next/link';
 import { useLanguage } from '@/app/context/LanguageContext';
 

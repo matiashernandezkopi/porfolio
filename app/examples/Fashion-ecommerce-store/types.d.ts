@@ -1,6 +1,4 @@
-import { DocumentReference } from "firebase/firestore";
-
-export interface ClotheListProps {
+interface ClotheListProps {
   item: {
       gender: string;
       name: string;

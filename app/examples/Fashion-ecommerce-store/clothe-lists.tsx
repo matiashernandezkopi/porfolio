@@ -4,7 +4,6 @@ import React from 'react';
 import HoverImage from './clothe';
 import { useLanguage } from '@/app/context/LanguageContext';
 import Link from 'next/link';
-import { ClotheListProps } from './types.t';
 
 interface ClotheListPropsNew {
     item: ClotheListProps["item"];

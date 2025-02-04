@@ -3,7 +3,7 @@
 import { db } from './config';
 import { collection, addDoc, query, where, getDocs, doc, deleteDoc, updateDoc, DocumentReference, getDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid'; // Importa uuid para generar un ID único
-import { ClotheListProps } from '../types.t';
+import { ClotheListProps } from '../types';
 
 
 

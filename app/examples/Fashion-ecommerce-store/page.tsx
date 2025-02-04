@@ -3,7 +3,6 @@ import { useLanguage } from "@/app/context/LanguageContext";
 import { useEffect, useState } from "react";
 import { getAllDocuments } from "./firebase/clothes";
 import ClotheList from "./clothe-lists";
-import { ClotheListProps } from "./types.t";
 import Footer from "./components/footer";
 import Header from "./components/header";
 

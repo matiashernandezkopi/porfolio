@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import Footer from "../components/footer";
 import { useLanguage } from "@/app/context/LanguageContext";
 import Header from "../components/header";
