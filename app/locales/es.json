@@ -27,8 +27,31 @@
     "highScore": "Puntuación Máxima",
     "score": "Puntuación",
     "caloriesPerUnit": "calorías por {{unit}}",
-    "lostMessage": "¡Has perdido!"
+    "lostMessage": "¡Has perdido!",
   
+
+
+
+
+    "welcome": "Bienvenido",
+    "welcomeSubtitle": "Bienvenido a nuestra tienda",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "shop": "Tienda",
+    "contact": "Contacto",
+    "shopNow": "Comprar Ahora",
+    "buyNow": "Comprar Ahora",
+    "gender":"Genero",
+    "any": "Cualquiera",
+    "male":"Hombre",
+    "female":"Mujer",
+    "name":"Nombre",
+    "maxPrice":"Precio Máximo",
+    "color":"Color",
+    "long":"Largo",
+    "yes":"Sí",
+    "no":"No",
+    "all":"Todos"
   }
   
   

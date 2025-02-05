@@ -51,12 +51,12 @@ const Header = () => {
             >
 
                 <a href="#contact" className="text-lg font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition" >
-                Contact
+                {t("contact")}
                 </a>
             </div>
           </nav>
           <button className="ml-4 bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-            Shop Now
+            {t("shopNow")}
           </button>
         </div>
 

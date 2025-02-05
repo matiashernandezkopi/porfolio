@@ -48,14 +48,11 @@ function Page() {
         {/* Hero Section */}
         <section id="home" className="text-center py-20">
           <h2 className="text-5xl font-bold text-gray-800 dark:text-white leading-tight">
-            {t("welcomeTitle")}
+            {t("welcome")}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 mt-4">
             {t("welcomeSubtitle")}
           </p>
-          <button className="mt-6 bg-gray-800 text-white px-8 py-3 rounded-full shadow-lg hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 transition">
-            {t("discoverCollection")}
-          </button>
         </section>
 
         {collection.map((collection, index) => (

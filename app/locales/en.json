@@ -31,7 +31,32 @@
     "highScore": "High Score",
     "score": "Score",
     "caloriesPerUnit": "calories per {{unit}}",
-    "lostMessage": "You've lost!"
+    "lostMessage": "You've lost!",
+    
+
+
+
+
+    
+    "welcome": "Welcome",
+    "welcomeSubtitle": "Welcome to our store",
+    "home": "Home",
+    "about": "About",
+    "shop": "Shop",
+    "contact": "Contact",
+    "shopNow": "Shop Now",
+    "buyNow": "Buy Now",
+    "gender":"Gender",
+    "any": "Any",
+    "male":"Male",
+    "female":"Female",
+    "name":"Name",
+    "maxPrice":"Max Price",
+    "color":"Color",
+    "long":"Long",
+    "yes":"Yes",
+    "no":"No",
+    "all":"All"
     
   }
   

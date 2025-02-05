@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { getAllDocuments } from '../firebase/clothes';
 import ClotheList from '../clothe-lists';
 import { Slider } from "@/components/ui/slider";
-
-
-const sizeOptions = ['Any','S', 'M', 'L', 'XL'];
+import { useLanguage } from '@/app/context/LanguageContext';
 
 const ShopPage: React.FC = () => {
+    const { t } = useLanguage();
+    const sizeOptions = [t("all"), 'S', 'M', 'L', 'XL'];
     const [items, setItems] = useState<ClotheListProps["item"][]>([]);
     const [gender, setGender] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -26,12 +26,19 @@ const ShopPage: React.FC = () => {
             try {
                 const fetchedClothes = await getAllDocuments();
                 setItems(fetchedClothes);
-                setCollectionColors(fetchedClothes.map((item) => item.color));
+                
+                const uniqueColors = Array.from(new Set(fetchedClothes.flatMap((item) => {
+                    const colors = item.color.split(/(?=[A-Z])/); // Split on uppercase letters
+                    return colors.map((color: string) => color.toLowerCase());
+                })));
+                setCollectionColors(uniqueColors);
+                
                 const uniqueCollections = Array.from(new Set(fetchedClothes.map((item) => item.collection)));
                 setCollections(uniqueCollections);
+                
                 const uniqueSizes = Array.from(new Set(fetchedClothes.flatMap((item) => item.sizes)));
                 setSizes(uniqueSizes);
-                console.log(collectionColors);
+                
             } catch (error) {
                 console.error("Error fetching clothes: ", error);
             }
@@ -41,11 +48,14 @@ const ShopPage: React.FC = () => {
     }, []);
 
     const filteredItems = items.filter(item => {
+        const colorMatch = color ? item.color.toLowerCase().includes(color.toLowerCase()) || 
+            (color.toLowerCase() === 'white' && (item.color.toLowerCase().includes('bluewhite') || item.color.toLowerCase().includes('whiteblack'))) : true;
+        
         return (
             (gender ? item.gender.toLowerCase().includes(gender.toLowerCase()) : true) &&
             (name ? item.name.toLowerCase().includes(name.toLowerCase()) : true) &&
-            (price ? item.price <= price : true) &&
-            (color ? item.color.toLowerCase().includes(color.toLowerCase()) : true) &&
+            (price ? item.price >= price : true) &&
+            colorMatch &&
             (long !== null ? item.long === long : true) &&
             (size ? item.sizes.some(s => sizeOptions.indexOf(s) >= size[0] && sizeOptions.indexOf(s) <= size[1]) : true) &&
             (collection ? item.collection.toLowerCase().includes(collection.toLowerCase()) : true)
@@ -61,36 +71,41 @@ const ShopPage: React.FC = () => {
                 <section className="text-center py-10">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <label className="block">
-                            Gender:
+                            {t("gender")}:
                             <select value={gender} onChange={e => setGender(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                <option value="">Any</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="">{t("any")}</option>
+                                <option value="male">{t("male")}</option>
+                                <option value="female">{t("female")}</option>
                                 <option value="unisex">Unisex</option>
                             </select>
                         </label>
                         <label className="block">
-                            Name:
+                            {t("name")}:
                             <input type="text" value={name} onChange={e => setName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
                         </label>
                         <label className="block">
-                            Max Price:
+                            {t("maxPrice")}:
                             <input type="number" value={price || ''} onChange={e => setPrice(Number(e.target.value))} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
                         </label>
                         <label className="block">
-                            Color:
-                            <input type="text" value={color} onChange={e => setColor(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-                        </label>
-                        <label className="block">
-                            Long:
-                            <select value={long !== null ? long.toString() : ''} onChange={e => setLong(e.target.value === 'true')} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                <option value="">Any</option>
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
+                            {t("color")}:
+                            <select value={color} onChange={e => setColor(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                <option value="">{t("any")}</option>
+                                {collectionColors.map((col, index) => (
+                                    <option key={index} value={col}>{col}</option>
+                                ))}
                             </select>
                         </label>
                         <label className="block">
-                            Size:
+                            {t("long")}:
+                            <select value={long !== null ? long.toString() : ''} onChange={e => setLong(e.target.value === 'true')} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                <option value="">{t("any")}</option>
+                                <option value="true">{t("yes")}</option>
+                                <option value="false">{t("no")}</option>
+                            </select>
+                        </label>
+                        <label className="block">
+                            {t("size")}:
                             <Slider
                                 value={size}
                                 onValueChange={(value: number[]) => setSize(value)}
@@ -104,9 +119,9 @@ const ShopPage: React.FC = () => {
                             </div>
                         </label>
                         <label className="block">
-                            Collection:
+                            {t("collection")}:
                             <select value={collection} onChange={e => setCollection(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                <option value="">Any</option>
+                                <option value="">{t("any")}</option>
                                 {collections.map((col, index) => (
                                     <option key={index} value={col}>{col}</option>
                                 ))}
@@ -123,7 +138,7 @@ const ShopPage: React.FC = () => {
                 </section>
             </main>
             <footer className="py-6 bg-gray-800 text-white text-center">
-                <p>&copy; 2023 Fashion Ecommerce Store</p>
+                <p>&copy; 2023 Chimbi Fashion Store</p>
             </footer>
         </div>
     );
